@@ -1,0 +1,56 @@
+import numpy as np
+
+x = lambda t, y: t - y ** 2
+#x = lambda t, y: y - t ** 2 + 1
+
+a = 0
+b = 2
+n = 10
+
+t = np.empty(11)
+w = np.empty(11)
+h = (b - a) / n
+
+t[0] = 0
+w[0] = 1
+
+for i in range(10):
+    t[i] = h * i
+    t[i] = np.round(t[i], 1)
+
+for i in range(10):
+    w[i + 1] = w[i] + (h * x(t[i], w[i]))
+    #w[i + 1] = np.round(w[i + 1], 10)
+    print(f'{w[i]: .16f}')
+print(w[10])
+
+print()
+
+#runge-kutta
+#f = lambda x,y: y - x ** 2 + 1
+f = lambda t, y: t - y ** 2
+
+newT = np.empty(11)
+newW = np.empty(11)
+k = np.empty(4)
+
+a = 0
+b = 2
+n = 10
+
+h = (b - a) / n
+newW[0] = 1
+
+for i in range(10):
+    newT[i] = h * i
+    newT[i] = np.round(newT[i], 1)
+
+for i in range(10):
+    k[0] = h * f(newT[i], newW[i])
+    k[1] = h * f(newT[i] + (0.2 / 2), newW[i] + (k[0] / 2))
+    k[2] = h * f(newT[i] + (0.2 / 2),  newW[i] + (k[1] / 2))
+    k[3] = h * f(newT[i] + 0.2, newW[i] + k[2])
+    newW[i + 1] = newW[i] + (1 / 6) * (k[0] + (2 * k[1]) + (2 * k[2]) + k[3])
+    #print(f'{newW[i]: .7f}')
+#print(f'{newW[10]: .7f}')
+print(newW[10])
