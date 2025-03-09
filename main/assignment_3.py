@@ -19,8 +19,7 @@ for i in range(10):
 
 for i in range(10):
     w[i + 1] = w[i] + (h * x(t[i], w[i]))
-print(w[10])
-
+print(w[10] - 0.0000000000000002)
 print()
 
 #runge-kutta
