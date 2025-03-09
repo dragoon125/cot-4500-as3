@@ -19,7 +19,6 @@ for i in range(10):
 
 for i in range(10):
     w[i + 1] = w[i] + (h * x(t[i], w[i]))
-    print(f'{w[i]: .16f}')
 print(w[10])
 
 print()
